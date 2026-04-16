@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Project {
+  githubId    Int       @id @unique
+  name        String
+  fullName    String
+  owner       String
+  avatarUrl   String
+  htmlUrl     String
+  description String?
+  language    String?
+  stars       Int
+  forks       Int
+  openIssues  Int
+  createdAt   DateTime
+  updatedAt   DateTime
+  pushedAt    DateTime
+  category    String?
+
+  collections Collection[]
+
+  @@map("projects")
+}
+
+model Collection {
+  id        Int      @id @default(autoincrement())
+  githubId  Int
+  note      String?
+  createdAt DateTime @default(now())
+
+  project Project @relation(fields: [githubId], references: [githubId], onDelete: Cascade)
+
+  @@unique([githubId])
+  @@map("collections")
+}
