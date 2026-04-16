@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  githubId    Int      @unique
+  name        String
+  fullName    String
+  owner       String
+  ownerAvatar String
+  description String?
+  language    String?
+  stars       Int
+  forks       Int
+  issues      Int
+  createdAt   DateTime
+  pushedAt    DateTime
+  htmlUrl     String
+  
+  // Star 增长追踪字段
+  starsPrev   Int      @default(0)  // 上次记录的 star 数
+  starsGrowth Float    @default(0)  // 增长率 (百分比)
+  growthTier  String   @default("none") // none | rising | hot | explosive
+  
+  // 关联收藏
+  collections Collection[]
+  
+  // 缓存时间戳
+  cachedAt    DateTime @default(now())
+  
+  @@index([githubId])
+  @@index([stars])
+  @@index([createdAt])
+  @@index([pushedAt])
+  @@index([growthTier])
+}
+
+model Collection {
+  id        Int      @id @default(autoincrement())
+  githubId  Int      // 与 Project.githubId 关联
+  createdAt DateTime @default(now())
+  
+  // 关联到 Project
+  project   Project  @relation(fields: [githubId], references: [githubId], onDelete: Cascade)
+  
+  @@unique([githubId])
+  @@index([githubId])
+}
