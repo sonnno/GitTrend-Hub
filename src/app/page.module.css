@@ -1,0 +1,99 @@
+.main {
+  min-height: 100vh;
+  padding: 40px 24px 80px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.gradient {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.statPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.pillIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--accent-primary);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px;
+  gap: 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+}
+
+.loadingText {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 24px 16px 60px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .statPill {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
